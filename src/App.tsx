@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
+import Signup from "./pages/Signup";
 import AdminLogin from "./pages/AdminLogin";
 import DevLogin from "./pages/DevLogin";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -36,9 +37,10 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
-          <Routes>
+           <Routes>
             {/* Public routes */}
             <Route path="/" element={<Index />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/payment/success" element={<PaymentSuccess />} />
             <Route path="/payment/failure" element={<PaymentFailure />} />
             <Route path="/admin/login" element={<AdminLogin />} />

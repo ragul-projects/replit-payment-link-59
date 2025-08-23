@@ -1,22 +1,28 @@
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { PaymentForm } from "@/components/PaymentForm";
 import { PaymentDisplay } from "@/components/PaymentDisplay";
 import { StatusChecker } from "@/components/StatusChecker";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { QrCode, Zap, Shield, Users, TrendingUp, Clock, CreditCard, Moon, Sun } from "lucide-react";
+import { QrCode, Zap, Shield, Users, TrendingUp, Clock, CreditCard } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { useTheme } from "next-themes";
+import { EnhancedHeader } from "@/components/EnhancedHeader";
+import { AuthRequired } from "@/components/AuthRequired";
+import { PaymentFormSkeleton, PaymentDisplaySkeleton, StatusCheckerSkeleton } from "@/components/PaymentSkeletons";
+import { LoadingOverlay } from "@/components/LoadingSpinner";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Index = () => {
   const navigate = useNavigate();
-  const { theme, setTheme } = useTheme();
+  const { state } = useAuth();
   const [paymentData, setPaymentData] = useState(null);
   const [activeSection, setActiveSection] = useState<'payment' | 'status'>('payment');
-
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+  const [isLoading, setIsLoading] = useState(false);
+  const handleSectionChange = (section: string) => {
+    if (section === 'payment' || section === 'status') {
+      setActiveSection(section);
+    }
   };
 
   const stats = [
@@ -48,46 +54,77 @@ const Index = () => {
   ];
 
   const renderMainContent = () => {
+    // Protected content - requires authentication
+    if (!state.isAuthenticated) {
+      switch (activeSection) {
+        case 'payment':
+          return (
+            <AuthRequired
+              title="Sign in to Generate Payments"
+              description="Create secure UPI QR codes and payment links with real-time tracking. Please sign in to access this feature."
+            />
+          );
+        case 'status':
+          return (
+            <AuthRequired
+              title="Sign in to Track Payments"
+              description="Check real-time payment status and transaction history. Please sign in to access this feature."
+            />
+          );
+        default:
+          return null;
+      }
+    }
+
+    // Authenticated content
     switch (activeSection) {
       case 'payment':
         return (
-          <div className="grid lg:grid-cols-2 gap-8">
-            <div className="space-y-6">
-              <PaymentForm onPaymentGenerated={setPaymentData} />
+          <LoadingOverlay isLoading={isLoading} text="Processing payment...">
+            <div className="grid lg:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <Suspense fallback={<PaymentFormSkeleton />}>
+                  <PaymentForm onPaymentGenerated={setPaymentData} />
+                </Suspense>
+              </div>
+              <div className="lg:sticky lg:top-24">
+                {paymentData ? (
+                  <Suspense fallback={<PaymentDisplaySkeleton />}>
+                    <PaymentDisplay paymentData={paymentData} />
+                  </Suspense>
+                ) : (
+                  <Card className="card-payment">
+                    <CardContent className="p-8 h-full flex items-center justify-center min-h-[500px]">
+                      <div className="text-center space-y-6 animate-fade-in">
+                        <div className="mx-auto p-6 bg-primary/10 rounded-2xl w-fit">
+                          <QrCode className="h-16 w-16 text-primary" />
+                        </div>
+                        <div>
+                          <h3 className="text-2xl font-bold mb-3 text-foreground">Payment Preview</h3>
+                          <p className="text-muted-foreground max-w-sm mx-auto leading-relaxed">
+                            Your generated QR code and payment details will appear here. 
+                            Start by filling out the payment form.
+                          </p>
+                        </div>
+                        <div className="flex justify-center">
+                          <Badge variant="outline" className="text-primary border-primary/30">
+                            Ready to Process
+                          </Badge>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
             </div>
-            <div className="lg:sticky lg:top-24">
-              {paymentData ? (
-                <PaymentDisplay paymentData={paymentData} />
-              ) : (
-                <Card className="card-payment">
-                  <CardContent className="p-8 h-full flex items-center justify-center min-h-[500px]">
-                    <div className="text-center space-y-6 animate-fade-in">
-                      <div className="mx-auto p-6 bg-primary/10 rounded-2xl w-fit">
-                        <QrCode className="h-16 w-16 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-bold mb-3 text-foreground">Payment Preview</h3>
-                        <p className="text-muted-foreground max-w-sm mx-auto leading-relaxed">
-                          Your generated QR code and payment details will appear here. 
-                          Start by filling out the payment form.
-                        </p>
-                      </div>
-                      <div className="flex justify-center">
-                        <Badge variant="outline" className="text-primary border-primary/30">
-                          Ready to Process
-                        </Badge>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
-            </div>
-          </div>
+          </LoadingOverlay>
         );
       case 'status':
         return (
           <div className="max-w-2xl mx-auto">
-            <StatusChecker />
+            <Suspense fallback={<StatusCheckerSkeleton />}>
+              <StatusChecker />
+            </Suspense>
           </div>
         );
       default:
@@ -97,62 +134,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Simple Header */}
-      <header className="sticky top-0 z-50 bg-white/95 dark:bg-card/95 backdrop-blur-md border-b border-white/20 dark:border-white/10 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-3">
-              <div className="p-2 bg-gradient-to-r from-primary to-primary-glow rounded-xl">
-                <CreditCard className="h-6 w-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-primary">
-                  SecurePay UPI
-                </h1>
-                <p className="text-xs text-muted-foreground">Instant • Secure • Reliable</p>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-4">
-              <Button
-                variant={activeSection === 'payment' ? "default" : "ghost"}
-                onClick={() => setActiveSection('payment')}
-                className="flex items-center space-x-2"
-              >
-                <CreditCard className="h-4 w-4" />
-                <span>Payments</span>
-              </Button>
-              <Button
-                variant={activeSection === 'status' ? "default" : "ghost"}
-                onClick={() => setActiveSection('status')}
-                className="flex items-center space-x-2"
-              >
-                <Zap className="h-4 w-4" />
-                <span>Track Status</span>
-              </Button>
-              
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={toggleTheme}
-                className="w-9 h-9 p-0"
-              >
-                {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-              </Button>
-
-              {/* Developer Login Link */}
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => navigate('/dev/login')}
-                className="text-xs px-2"
-              >
-                Dev Login
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Enhanced Header */}
+      <EnhancedHeader 
+        activeSection={activeSection} 
+        onSectionChange={handleSectionChange}
+      />
 
       {/* Hero Section */}
       <section className="relative py-16 px-4 overflow-hidden">
