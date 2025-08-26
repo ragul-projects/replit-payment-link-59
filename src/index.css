@@ -8,58 +8,68 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 222 84% 5%;
+    --background: 240 10% 98%;
+    --foreground: 240 10% 4%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 84% 5%;
+    --card-foreground: 240 10% 4%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 84% 5%;
+    --popover-foreground: 240 10% 4%;
 
-    /* Fintech Blue-Green Gradient System */
-    --primary: 208 100% 47%;
+    /* Modern Gradient System */
+    --primary: 238 100% 70%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 184 100% 50%;
+    --primary-glow: 266 100% 75%;
     
-    --fintech-blue: 208 100% 47%;
-    --fintech-green: 156 73% 46%;
-    --fintech-teal: 184 100% 50%;
+    --fintech-blue: 238 100% 70%;
+    --fintech-purple: 266 100% 75%;
+    --fintech-cyan: 194 100% 65%;
+    --fintech-green: 158 64% 52%;
 
-    --secondary: 210 40% 93%;
-    --secondary-foreground: 222 84% 5%;
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 6% 10%;
 
-    --muted: 210 40% 93%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%;
 
-    --accent: 210 40% 96%;
-    --accent-foreground: 208 100% 47%;
+    --accent: 240 5% 96%;
+    --accent-foreground: 238 100% 70%;
 
-    --success: 156 73% 46%;
+    --success: 158 64% 52%;
     --success-foreground: 0 0% 100%;
 
-    --warning: 38 92% 50%;
+    --warning: 43 96% 56%;
     --warning-foreground: 0 0% 10%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 91% 71%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 208 100% 47%;
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 238 100% 70%;
 
-    /* Enhanced Gradients for Fintech */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--fintech-blue)), hsl(var(--fintech-teal)));
-    --gradient-success: linear-gradient(135deg, hsl(var(--fintech-green)), hsl(var(--fintech-teal)));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(220 20% 98%));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--fintech-blue)) 0%, hsl(var(--fintech-teal)) 50%, hsl(var(--fintech-green)) 100%);
+    /* Modern Enhanced Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--fintech-blue)) 0%, hsl(var(--fintech-purple)) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--fintech-cyan)) 0%, hsl(var(--fintech-green)) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(var(--fintech-green)) 0%, hsl(var(--fintech-cyan)) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100% / 0.9), hsl(240 10% 98% / 0.8));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(var(--fintech-blue)) 0%, hsl(var(--fintech-purple)) 35%, hsl(var(--fintech-cyan)) 70%, hsl(var(--fintech-green)) 100%);
+    --gradient-mesh: conic-gradient(from 0deg at 50% 50%, hsl(var(--fintech-blue)), hsl(var(--fintech-purple)), hsl(var(--fintech-cyan)), hsl(var(--fintech-green)), hsl(var(--fintech-blue)));
     
-    /* Enhanced Shadows */
-    --shadow-card: 0 8px 32px -8px hsl(var(--fintech-blue) / 0.12);
-    --shadow-button: 0 4px 16px -4px hsl(var(--fintech-blue) / 0.24);
-    --shadow-glow: 0 0 40px hsl(var(--fintech-teal) / 0.3);
+    /* Modern Enhanced Shadows */
+    --shadow-xs: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
+    --shadow-sm: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -4px hsl(0 0% 0% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.1), 0 8px 10px -6px hsl(0 0% 0% / 0.1);
+    --shadow-2xl: 0 25px 50px -12px hsl(0 0% 0% / 0.25);
+    --shadow-card: 0 8px 32px -8px hsl(var(--fintech-blue) / 0.15), 0 0 0 1px hsl(0 0% 100% / 0.05);
+    --shadow-button: 0 4px 16px -4px hsl(var(--fintech-blue) / 0.3);
+    --shadow-glow: 0 0 50px hsl(var(--fintech-purple) / 0.4);
+    --shadow-colored: 0 8px 32px -12px hsl(var(--fintech-blue) / 0.35);
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -79,52 +89,63 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222 84% 5%;
-    --foreground: 210 40% 98%;
+    --background: 240 10% 4%;
+    --foreground: 240 5% 96%;
 
-    --card: 222 84% 8%;
-    --card-foreground: 210 40% 98%;
+    --card: 240 10% 4%;
+    --card-foreground: 240 5% 96%;
 
-    --popover: 222 84% 8%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 240 10% 4%;
+    --popover-foreground: 240 5% 96%;
 
-    --primary: 208 100% 60%;
+    --primary: 238 100% 70%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 184 100% 65%;
+    --primary-glow: 266 100% 75%;
     
-    --fintech-blue: 208 100% 60%;
-    --fintech-green: 156 73% 55%;
-    --fintech-teal: 184 100% 65%;
+    --fintech-blue: 238 100% 70%;
+    --fintech-purple: 266 100% 75%;
+    --fintech-cyan: 194 100% 65%;
+    --fintech-green: 158 64% 52%;
 
-    --secondary: 217 32% 17%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 240 5% 96%;
 
-    --muted: 217 32% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 64%;
 
-    --accent: 217 32% 20%;
-    --accent-foreground: 208 100% 60%;
+    --accent: 240 4% 16%;
+    --accent-foreground: 238 100% 70%;
 
-    --success: 156 73% 55%;
+    --success: 158 64% 52%;
     --success-foreground: 0 0% 100%;
 
-    --warning: 38 92% 50%;
+    --warning: 43 96% 56%;
     --warning-foreground: 0 0% 10%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 91% 71%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 217 32% 17%;
-    --input: 217 32% 17%;
-    --ring: 208 100% 60%;
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 238 100% 70%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(var(--fintech-blue)), hsl(var(--fintech-teal)));
-    --gradient-success: linear-gradient(135deg, hsl(var(--fintech-green)), hsl(var(--fintech-teal)));
-    --gradient-card: linear-gradient(145deg, hsl(222 84% 8%), hsl(222 84% 12%));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--fintech-blue)) 0%, hsl(var(--fintech-teal)) 50%, hsl(var(--fintech-green)) 100%);
-    --shadow-card: 0 8px 32px -8px hsl(0 0% 0% / 0.4);
+    --gradient-primary: linear-gradient(135deg, hsl(var(--fintech-blue)) 0%, hsl(var(--fintech-purple)) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--fintech-cyan)) 0%, hsl(var(--fintech-green)) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(var(--fintech-green)) 0%, hsl(var(--fintech-cyan)) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(240 10% 4% / 0.95), hsl(240 4% 16% / 0.8));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(var(--fintech-blue)) 0%, hsl(var(--fintech-purple)) 35%, hsl(var(--fintech-cyan)) 70%, hsl(var(--fintech-green)) 100%);
+    --gradient-mesh: conic-gradient(from 0deg at 50% 50%, hsl(var(--fintech-blue)), hsl(var(--fintech-purple)), hsl(var(--fintech-cyan)), hsl(var(--fintech-green)), hsl(var(--fintech-blue)));
+    
+    --shadow-xs: 0 1px 2px 0 hsl(0 0% 0% / 0.3);
+    --shadow-sm: 0 1px 3px 0 hsl(0 0% 0% / 0.4), 0 1px 2px -1px hsl(0 0% 0% / 0.4);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.4), 0 2px 4px -2px hsl(0 0% 0% / 0.4);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.4), 0 4px 6px -4px hsl(0 0% 0% / 0.4);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.4), 0 8px 10px -6px hsl(0 0% 0% / 0.4);
+    --shadow-2xl: 0 25px 50px -12px hsl(0 0% 0% / 0.6);
+    --shadow-card: 0 8px 32px -8px hsl(0 0% 0% / 0.6), 0 0 0 1px hsl(240 4% 16% / 0.5);
     --shadow-button: 0 4px 16px -4px hsl(var(--fintech-blue) / 0.4);
-    --shadow-glow: 0 0 40px hsl(var(--fintech-teal) / 0.4);
+    --shadow-glow: 0 0 50px hsl(var(--fintech-purple) / 0.5);
+    --shadow-colored: 0 8px 32px -12px hsl(var(--fintech-blue) / 0.6);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -142,82 +163,183 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', 'Geist Sans', system-ui, -apple-system, sans-serif;
     background: var(--gradient-hero);
     min-height: 100vh;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    letter-spacing: -0.01em;
   }
 
   html {
     scroll-behavior: smooth;
   }
+
+  /* Modern Typography Scale */
+  .text-display-2xl {
+    font-size: 4.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+  }
+
+  .text-display-xl {
+    font-size: 3.75rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  .text-display-lg {
+    font-size: 3rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
 }
 
 @layer components {
+  /* Modern Cards */
   .card-payment {
-    @apply bg-white/95 dark:bg-card/95 backdrop-blur-md rounded-2xl shadow-[var(--shadow-card)] border border-white/20 dark:border-white/10;
+    background: var(--gradient-card);
+    @apply backdrop-blur-xl rounded-3xl shadow-[var(--shadow-card)] 
+           border border-white/20 dark:border-white/5 relative overflow-hidden;
   }
-  
+
+  .card-payment::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5 pointer-events-none;
+  }
+
+  .card-modern {
+    @apply bg-white/60 dark:bg-white/5 backdrop-blur-2xl rounded-2xl 
+           shadow-[var(--shadow-lg)] border border-white/30 dark:border-white/10
+           relative overflow-hidden;
+  }
+
+  /* Enhanced Buttons */
   .button-payment {
     background: var(--gradient-primary);
     @apply text-primary-foreground shadow-[var(--shadow-button)] hover:shadow-[var(--shadow-glow)]
-           transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]
-           border-0 relative overflow-hidden;
+           transition-all duration-500 hover:scale-[1.02] active:scale-[0.98]
+           border-0 relative overflow-hidden rounded-xl font-semibold;
   }
 
   .button-payment::before {
     content: '';
-    @apply absolute inset-0 bg-white/20 opacity-0 transition-opacity duration-300;
+    @apply absolute inset-0 bg-white/20 opacity-0 transition-all duration-500;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: translateX(-100%);
   }
 
   .button-payment:hover::before {
     @apply opacity-100;
+    transform: translateX(100%);
   }
 
   .button-success {
     background: var(--gradient-success);
-    @apply text-success-foreground shadow-[var(--shadow-button)] hover:shadow-lg
-           transition-all duration-300 hover:scale-[1.02] active:scale-[0.98];
+    @apply text-success-foreground shadow-[var(--shadow-button)] hover:shadow-[var(--shadow-glow)]
+           transition-all duration-500 hover:scale-[1.02] active:scale-[0.98]
+           rounded-xl font-semibold relative overflow-hidden;
   }
 
+  .button-ghost-modern {
+    @apply bg-white/10 dark:bg-white/5 backdrop-blur-sm border border-white/20 dark:border-white/10
+           hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300
+           text-foreground hover:text-primary rounded-xl;
+  }
+
+  /* Modern Status Indicators */
   .status-success {
-    @apply bg-success/10 border border-success/20 text-success rounded-xl px-4 py-2 text-sm font-semibold
-           flex items-center gap-2 animate-fade-in;
+    @apply bg-gradient-to-r from-success/10 to-success/5 border border-success/30 text-success 
+           rounded-2xl px-5 py-3 text-sm font-semibold backdrop-blur-sm
+           flex items-center gap-3 animate-fade-in shadow-[var(--shadow-sm)];
   }
 
   .status-pending {
-    @apply bg-warning/10 border border-warning/20 text-warning rounded-xl px-4 py-2 text-sm font-semibold
-           flex items-center gap-2 animate-pulse;
+    @apply bg-gradient-to-r from-warning/10 to-warning/5 border border-warning/30 text-warning 
+           rounded-2xl px-5 py-3 text-sm font-semibold backdrop-blur-sm
+           flex items-center gap-3 animate-pulse shadow-[var(--shadow-sm)];
   }
 
   .status-failed {
-    @apply bg-destructive/10 border border-destructive/20 text-destructive rounded-xl px-4 py-2 text-sm font-semibold
-           flex items-center gap-2 animate-fade-in;
+    @apply bg-gradient-to-r from-destructive/10 to-destructive/5 border border-destructive/30 text-destructive 
+           rounded-2xl px-5 py-3 text-sm font-semibold backdrop-blur-sm
+           flex items-center gap-3 animate-fade-in shadow-[var(--shadow-sm)];
   }
 
+  /* Enhanced Glass Effects */
   .glass-effect {
-    @apply bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/10;
+    @apply bg-white/10 dark:bg-white/5 backdrop-blur-2xl border border-white/20 dark:border-white/10
+           shadow-[var(--shadow-lg)] relative;
   }
 
-  .fintech-gradient {
+  .glass-effect::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5 pointer-events-none;
+  }
+
+  .glass-navbar {
+    @apply bg-white/80 dark:bg-black/20 backdrop-blur-2xl border-b border-white/20 dark:border-white/10
+           shadow-[var(--shadow-sm)] sticky top-0 z-50;
+  }
+
+  /* Modern Gradients */
+  .gradient-text {
     background: var(--gradient-primary);
-    @apply bg-clip-text text-transparent;
+    @apply bg-clip-text text-transparent font-bold;
+  }
+
+  .gradient-mesh {
+    background: var(--gradient-mesh);
+    @apply opacity-30 blur-3xl;
   }
 
   .hero-gradient {
     background: var(--gradient-hero);
-    @apply bg-clip-text text-transparent;
   }
 
-  .loader {
-    @apply animate-spin rounded-full border-2 border-muted border-t-primary;
+  /* Loading States */
+  .loader-modern {
+    @apply relative;
   }
 
+  .loader-modern::after {
+    content: '';
+    @apply absolute inset-0 rounded-full border-2 border-transparent
+           bg-gradient-to-r from-primary via-primary-glow to-primary bg-clip-border
+           animate-spin;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+
+  /* Modern Indicators */
   .security-badge {
-    @apply inline-flex items-center gap-2 px-3 py-1.5 bg-success/10 border border-success/20 
-           text-success text-sm font-medium rounded-full animate-fade-in;
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-success/10 to-success/5 
+           border border-success/30 text-success text-sm font-semibold rounded-2xl 
+           animate-fade-in backdrop-blur-sm shadow-[var(--shadow-sm)];
   }
 
   .trust-indicator {
-    @apply flex items-center gap-2 text-sm text-muted-foreground bg-muted/30 px-3 py-2 rounded-lg;
+    @apply flex items-center gap-3 text-sm text-muted-foreground 
+           bg-white/20 dark:bg-white/10 backdrop-blur-sm px-4 py-3 rounded-2xl
+           border border-white/20 dark:border-white/10 shadow-[var(--shadow-sm)];
+  }
+
+  .modern-input {
+    @apply bg-white/50 dark:bg-white/5 backdrop-blur-sm border border-white/30 dark:border-white/10
+           focus:border-primary/50 focus:ring-2 focus:ring-primary/20 
+           rounded-xl transition-all duration-300 px-4 py-3
+           placeholder:text-muted-foreground/60;
+  }
+
+  /* Floating Elements */
+  .floating-card {
+    @apply transform transition-all duration-500 hover:translate-y-[-8px] hover:shadow-[var(--shadow-2xl)];
+  }
+
+  .hover-lift {
+    @apply transform transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[var(--shadow-lg)];
   }
 }

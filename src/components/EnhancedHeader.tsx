@@ -23,22 +23,21 @@ export function EnhancedHeader({ activeSection, onSectionChange }: EnhancedHeade
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 dark:bg-card/95 backdrop-blur-md border-b border-white/20 dark:border-white/10 shadow-sm">
+    <header className="glass-navbar">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo & Brand */}
-          <Link to="/" className="flex items-center space-x-3 group">
+          <Link to="/" className="flex items-center space-x-3 group hover-lift">
             <div className="relative">
-              <div className="p-2 bg-gradient-to-r from-fintech-blue to-fintech-teal rounded-xl group-hover:shadow-lg transition-all duration-300">
+              <div className="p-2.5 bg-gradient-to-br from-fintech-blue via-fintech-purple to-fintech-cyan rounded-2xl group-hover:shadow-glow transition-all duration-500 animate-glow">
                 <CreditCard className="h-6 w-6 text-white" />
               </div>
-              <div className="absolute inset-0 p-2 bg-gradient-to-r from-fintech-blue to-fintech-teal rounded-xl opacity-0 group-hover:opacity-20 animate-pulse" />
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-xl font-bold hero-gradient">
+              <h1 className="text-xl font-bold gradient-text">
                 SecurePay UPI
               </h1>
-              <p className="text-xs text-muted-foreground">Instant • Secure • Reliable</p>
+              <p className="text-xs text-muted-foreground font-medium">Instant • Secure • Modern</p>
             </div>
           </Link>
 
@@ -46,12 +45,14 @@ export function EnhancedHeader({ activeSection, onSectionChange }: EnhancedHeade
           {state.isAuthenticated && (
             <nav className="hidden md:flex items-center space-x-1">
               {navItems.map((item) => (
-                <Button
-                  key={item.id}
-                  variant={activeSection === item.id ? "default" : "ghost"}
-                  onClick={() => onSectionChange?.(item.id)}
-                  className="flex items-center space-x-2 hover:bg-white/10 dark:hover:bg-white/5"
-                >
+                  <Button
+                    key={item.id}
+                    variant={activeSection === item.id ? "default" : "ghost"}
+                    className={`${activeSection === item.id ? "button-payment" : "button-ghost-modern"} 
+                               flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300
+                               hover:scale-105`}
+                    onClick={() => onSectionChange?.(item.id)}
+                  >
                   <item.icon className="h-4 w-4" />
                   <span>{item.label}</span>
                 </Button>

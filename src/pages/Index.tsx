@@ -174,9 +174,9 @@ const Index = () => {
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Why Choose SecurePay?</h2>
+            <h2 className="text-3xl font-bold gradient-text mb-4">Why Choose SecurePay?</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Built with cutting-edge technology and banking-grade security for seamless payment experiences.
+              Experience the future of digital payments with our advanced features and modern interface.
             </p>
           </div>
           
@@ -184,15 +184,22 @@ const Index = () => {
             {features.map((feature, index) => (
               <Card 
                 key={feature.title} 
-                className="card-payment hover:shadow-lg transition-all duration-300 hover:scale-[1.02] animate-fade-in"
+                className="card-modern floating-card animate-fade-in hover-lift"
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <CardContent className="p-6 text-center">
-                  <div className={`inline-flex p-3 rounded-xl bg-current/10 mb-4 ${feature.color}`}>
+                <CardContent className="p-8 text-center space-y-4 relative">
+                  <div className="mx-auto p-4 bg-gradient-to-br from-primary/10 via-primary-glow/10 to-fintech-cyan/10 rounded-2xl w-fit animate-float">
                     <feature.icon className={`h-8 w-8 ${feature.color}`} />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3 text-foreground">{feature.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-semibold text-foreground">
+                      {feature.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
                 </CardContent>
               </Card>
             ))}
