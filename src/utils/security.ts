@@ -88,12 +88,30 @@ export class SecurityManager {
   // Sanitize input to prevent XSS
   static sanitizeInput(input: string): string {
     return input
-      .replace(/[<>]/g, '') // Remove potential HTML tags
-      .trim();
+      .replace(/[<>'"&]/g, (match) => {
+        const htmlEntities: Record<string, string> = {
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#x27;',
+          '&': '&amp;'
+        };
+        return htmlEntities[match] || match;
+      })
+      .trim()
+      .substring(0, 1000); // Limit input length
   }
 
-  // Generate secure random string
+  // Generate cryptographically secure random string
   static generateSecureToken(length: number = 32): string {
+    if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      const array = new Uint8Array(length);
+      crypto.getRandomValues(array);
+      return Array.from(array, (byte) => chars[byte % chars.length]).join('');
+    }
+    
+    // Fallback for environments without crypto API
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
     for (let i = 0; i < length; i++) {
@@ -130,30 +148,26 @@ export class SecurityManager {
     localStorage.removeItem(this.SESSION_KEY);
   }
 
-  // Log security events
+  // Log security events (demo only - would be server-side in production)
   static logSecurityEvent(action: string, success: boolean, details?: Record<string, any>): void {
-    const log: AuditLog = {
+    // In production, this would be sent to a secure logging service
+    const log = {
       id: this.generateSecureToken(16),
-      userId: 'current_user', // Would be actual user ID in real app
-      action,
-      resource: 'security',
+      action: this.sanitizeInput(action),
       timestamp: new Date().toISOString(),
-      ipAddress: 'client_ip', // Would be actual IP in real app
-      userAgent: navigator.userAgent,
       success,
-      details
+      // Remove sensitive details for client-side logging
+      details: details ? { type: details.type || 'auth_event' } : undefined
     };
 
-    // Store in localStorage for demo (would be sent to server in real app)
-    const logs = this.getAuditLogs();
-    logs.push(log);
-    localStorage.setItem('audit_logs', JSON.stringify(logs.slice(-100))); // Keep last 100 logs
+    // Console log for demo (would be secure server logging in production)
+    console.log('Security Event:', log);
   }
 
-  // Get audit logs
+  // Get audit logs (demo only - would be from secure server in production)
   static getAuditLogs(): AuditLog[] {
-    const logs = localStorage.getItem('audit_logs');
-    return logs ? JSON.parse(logs) : [];
+    // In production, this would fetch from secure server endpoint
+    return [];
   }
 
   // Validate file upload

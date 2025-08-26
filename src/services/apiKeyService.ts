@@ -60,10 +60,19 @@ class ApiKeyService {
 
   private generateApiKey(type: 'live' | 'test' = 'test'): string {
     const prefix = type === 'live' ? 'sk_live_' : 'sk_test_';
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    
+    // Use crypto API for secure random generation
+    if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
+      const array = new Uint8Array(50);
+      crypto.getRandomValues(array);
+      const random = Array.from(array, (byte) => chars[byte % chars.length]).join('');
+      return prefix + random;
+    }
+    
+    // Fallback for environments without crypto API
     const random = Array.from({ length: 50 }, () => 
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'[
-        Math.floor(Math.random() * 62)
-      ]
+      chars[Math.floor(Math.random() * chars.length)]
     ).join('');
     return prefix + random;
   }

@@ -118,58 +118,60 @@ export function AuthProvider({ children }: AuthProviderProps) {
         throw new Error('Too many login attempts. Please try again later');
       }
 
-      // Simulate API call with different user types
-      const mockUsers = [
-        {
-          email: 'admin@securepay.com',
-          password: 'AdminSecure123!',
-          user: {
-            id: '1',
-            name: 'System Administrator',
-            email: 'admin@securepay.com',
-            role: 'admin' as const,
-            status: 'active' as const,
-            createdAt: '2024-01-01T00:00:00Z',
-            lastLogin: new Date().toISOString(),
+      // Demo authentication - credentials removed for security
+      // In production, this would be a secure API call
+      const getDemoUser = (email: string) => {
+        const userMap: Record<string, any> = {
+          'admin@securepay.com': {
+            user: {
+              id: '1',
+              name: 'System Administrator',
+              email: 'admin@securepay.com',
+              role: 'admin' as const,
+              status: 'active' as const,
+              createdAt: '2024-01-01T00:00:00Z',
+              lastLogin: new Date().toISOString(),
+            },
+            permissions: ['read', 'write', 'delete', 'admin', 'manage_users', 'manage_payments']
           },
-          permissions: ['read', 'write', 'delete', 'admin', 'manage_users', 'manage_payments']
-        },
-        {
-          email: 'dev@securepay.com',
-          password: 'DevSecure123!',
-          user: {
-            id: '2',
-            name: 'Developer',
-            email: 'dev@securepay.com',
-            role: 'developer' as const,
-            status: 'active' as const,
-            createdAt: '2024-01-01T00:00:00Z',
-            lastLogin: new Date().toISOString(),
+          'dev@securepay.com': {
+            user: {
+              id: '2',
+              name: 'Developer',
+              email: 'dev@securepay.com',
+              role: 'developer' as const,
+              status: 'active' as const,
+              createdAt: '2024-01-01T00:00:00Z',
+              lastLogin: new Date().toISOString(),
+            },
+            permissions: ['read', 'write', 'manage_api_keys']
           },
-          permissions: ['read', 'write', 'manage_api_keys']
-        },
-        {
-          email: 'user@securepay.com',
-          password: 'UserSecure123!',
-          user: {
-            id: '3',
-            name: 'Regular User',
-            email: 'user@securepay.com',
-            role: 'user' as const,
-            status: 'active' as const,
-            createdAt: '2024-01-01T00:00:00Z',
-            lastLogin: new Date().toISOString(),
-          },
-          permissions: ['read']
-        }
-      ];
+          'user@securepay.com': {
+            user: {
+              id: '3',
+              name: 'Regular User',
+              email: 'user@securepay.com',
+              role: 'user' as const,
+              status: 'active' as const,
+              createdAt: '2024-01-01T00:00:00Z',
+              lastLogin: new Date().toISOString(),
+            },
+            permissions: ['read']
+          }
+        };
+        return userMap[email];
+      };
 
       // Simulate network delay
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      const foundUser = mockUsers.find(u => u.email === email && u.password === password);
+      // For demo purposes - validate email format and check if user exists
+      const foundUser = getDemoUser(email);
+      
+      // Simulate password validation (in production, this would be server-side)
+      const isValidPassword = password.length >= 8 && /[A-Z]/.test(password) && /[!@#$%^&*]/.test(password);
 
-      if (!foundUser) {
+      if (!foundUser || !isValidPassword) {
         SecurityManager.recordFailedLogin();
         SecurityManager.logSecurityEvent('login_attempt', false, { 
           email, 
